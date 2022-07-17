@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Dieta</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="barbat">Barbat</string>
+    <string name="femeie">Femeie</string>
+    <string name="deloc">Deloc</string>
+    <string name="o_data_pe_saptamana">O data pe saptamana</string>
+    <string name="de_trei_sau_mai_multe_ori_pe_saptamana">De trei sau mai multe ori pe saptamana</string>
+</resources>

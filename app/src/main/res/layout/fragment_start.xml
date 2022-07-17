@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".StartFragment">
+
+    <data>
+        <variable
+            name="startFragment"
+            type="com.example.dieta.StartFragment" />
+        <variable
+            name="viewModel"
+            type="com.example.dieta.model.SharedViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:hint="Introduceti numele"
+            app:layout_constraintTop_toTopOf="parent"
+            app:boxBackgroundColor="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nume_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColorHint="#3f51b5">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/gen_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:padding="8dp"
+            android:text="Alegeti genul :"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nume">
+
+        </TextView>
+
+        <RadioGroup
+
+            android:id="@+id/gen_optiune"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/gen_txt"
+            app:layout_constraintTop_toBottomOf="@id/gen_txt">
+
+            <RadioButton
+                android:id="@+id/barbat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:buttonTint="#3f51b5"
+                android:checked="@{viewModel.gen.equals(@string/barbat)}"
+                android:onClick="@{() -> viewModel.setGen(@string/barbat)}"
+                android:text="@string/barbat">
+
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/femeie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#3f51b5"
+                android:checked="@{viewModel.gen.equals(@string/femeie)}"
+                android:onClick="@{() -> viewModel.setGen(@string/femeie)}"
+                android:text="@string/femeie">
+
+            </RadioButton>
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inaltime"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:hint="Introduceti inaltimea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".32"
+            app:boxBackgroundColor="@color/white">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inaltime_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColorHint="#3f51b5"
+                >
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/greutate"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:hint="Introduceti greutatea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".45"
+            app:boxBackgroundColor="@color/white">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/greutate_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColorHint="#3f51b5">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/activitate_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="50dp"
+            android:padding="8dp"
+            android:text="De cate ori faceti sport pe saptamana ?"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greutate">
+
+        </TextView>
+
+        <RadioGroup
+            android:id="@+id/activitate_optiuni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@id/activitate_txt"
+            app:layout_constraintTop_toBottomOf="@id/activitate_txt">
+
+            <RadioButton
+                android:id="@+id/optiune_deloc"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="#3f51b5"
+                android:checked="@{viewModel.activitate.equals(@string/deloc)}"
+                android:onClick="@{() -> viewModel.setActivitate(@string/deloc)}"
+                android:text="@string/deloc" />
+
+            <RadioButton
+                android:id="@+id/optiune_o_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#3f51b5"
+                android:checked="@{viewModel.activitate.equals(@string/o_data_pe_saptamana)}"
+                android:onClick="@{() -> viewModel.setActivitate(@string/o_data_pe_saptamana)}"
+                android:text="@string/o_data_pe_saptamana" />
+
+            <RadioButton
+                android:id="@+id/optiune_de_trei_sau_mai_multe_ori"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#3f51b5"
+                android:checked="@{viewModel.activitate.equals(@string/de_trei_sau_mai_multe_ori_pe_saptamana)}"
+                android:onClick="@{() -> viewModel.setActivitate(@string/de_trei_sau_mai_multe_ori_pe_saptamana)}"
+                android:text="@string/de_trei_sau_mai_multe_ori_pe_saptamana" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buton1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#3f51b5"
+            android:onClick="@{() -> startFragment.goToNextScreen()}"
+            android:text="Calculati"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activitate_optiuni">
+
+        </Button>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

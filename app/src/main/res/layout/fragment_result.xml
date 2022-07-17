@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <variable
+            name="resultFragment"
+            type="com.example.dieta.ResultFragment" />
+        <variable
+            name="viewModel"
+            type="com.example.dieta.model.SharedViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ResultFragment"
+        android:background="@drawable/aplauze">
+
+
+        <TextView
+            android:layout_width="388dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="629dp"
+            android:text="Felicitari, ai completat datele cu succes!"
+            android:textSize="21dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="388dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="310dp"
+            android:text="@{viewModel.ideal.toString()}"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="181dp"
+            android:layout_height="178dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="106dp"
+            android:layout_marginBottom="440dp"
+            android:src="@drawable/ic_tick">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="388dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="-23dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="401dp"
+            android:text="Idealul tau zilnic de calorii este:"
+            android:textSize="21dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</layout>
