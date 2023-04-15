@@ -1,10 +1,10 @@
 package com.example.dieta.model
 
-import android.os.Build.VERSION_CODES.O
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dieta.R
+
 
 class SharedViewModel : ViewModel() {
     private var _nume= MutableLiveData<String>("")
@@ -29,26 +29,33 @@ class SharedViewModel : ViewModel() {
     val ideal : LiveData<Double> = _ideal
 
 
+
     fun setNumele(Numele: String){
         _nume.value= "$Numele "
+
     }
 
     fun setGen(Gen: String){
         _gen.value= Gen
+
     }
 
     fun setInaltime(Inaltime: Double){
         _inaltime.value= Inaltime
-    }
 
-    fun setGreutate(Greutate: Double){
-        _greutate.value= Greutate
     }
 
     fun setActivitate(Activitate: String){
         _activitate.value= Activitate
+
+    }
+
+    fun setGreutate(Greutate: Double){
+        _greutate.value= Greutate
         calculIdeal()
     }
+
+
 
 
 
@@ -56,7 +63,7 @@ class SharedViewModel : ViewModel() {
 
 
         if(_gen.value=="Barbat"){
-            _ideal.value = 2200.0
+            _ideal.value = 2000.0
         }
         if(_gen.value=="Femeie"){
             _ideal.value = 1800.0
@@ -66,11 +73,11 @@ class SharedViewModel : ViewModel() {
         {
             _ideal.value= (_ideal.value ?: 0.0)
         }
-        if(( _greutate.value ?: 0.0)  +10 <= (_inaltime.value ?: 0.0) -100)
+        if(( _greutate.value ?: 0.0)  < (_inaltime.value ?: 0.0) -100)
         {
             _ideal.value= (_ideal.value ?: 0.0) +300
         }
-        if(( _greutate.value ?: 0.0)  -10 >= (_inaltime.value ?: 0.0) -100)
+        if(( _greutate.value ?: 0.0)  > (_inaltime.value ?: 0.0) -100)
         {
             _ideal.value= (_ideal.value ?: 0.0) -300
         }
@@ -78,7 +85,7 @@ class SharedViewModel : ViewModel() {
         when(_activitate.value)
         {
             "Deloc" -> {
-                _ideal.value =(_ideal.value ?: 0.0)
+                _ideal.value =(_ideal.value ?: 0.0)-100
             }
             "O data pe saptamana" -> {
                 _ideal.value = (_ideal.value ?: 0.0) + 200
@@ -87,8 +94,9 @@ class SharedViewModel : ViewModel() {
                 _ideal.value = (_ideal.value ?: 0.0) + 500
             }
         }
-
     }
+
+
 
 
 }

@@ -7,4 +7,8 @@
     <string name="deloc">Deloc</string>
     <string name="o_data_pe_saptamana">O data pe saptamana</string>
     <string name="de_trei_sau_mai_multe_ori_pe_saptamana">De trei sau mai multe ori pe saptamana</string>
+    <string name="Nume">, ai completat datele cu succes !</string>
+    <string name="Felicitari">"Felicitari "</string>
+    <string name="ramase">"Calorii ramase: "</string>
+
 </resources>

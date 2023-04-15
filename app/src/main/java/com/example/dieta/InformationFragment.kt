@@ -1,59 +1,94 @@
 package com.example.dieta
 
 import android.os.Bundle
+import android.util.Log
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dieta.databinding.FragmentInformationBinding
+import com.example.dieta.databinding.FragmentStartBinding
+import com.example.dieta.model.SharedViewModel
+import kotlinx.android.synthetic.main.fragment_information.*
+import kotlinx.android.synthetic.main.row_items.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [InformationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+const val BASE_URL= "https://raw.githubusercontent.com/terrenjpeterson/caloriecounter/master/src/data/"
+
+
 class InformationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var binding: FragmentInformationBinding? = null
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
+    lateinit var adapterItem: AdapterItem
+    lateinit var linearLayoutManager: LinearLayoutManager
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_information, container, false)
+
+        getMyData()
+
+        val fragmentBinding = FragmentInformationBinding.inflate(inflater, container, false)
+        binding = fragmentBinding
+        return fragmentBinding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InformationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InformationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        linearLayoutManager = LinearLayoutManager(this.context)
+        recyclerview_lista.setHasFixedSize(true)
+        recyclerview_lista.layoutManager = linearLayoutManager
+
+        binding?.apply {
+            viewModel = sharedViewModel
+            informationFragment = this@InformationFragment
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+    }
+
+    fun onCalorieTotalChanged(total: Int) {
+        suma_txt.text = "Totalul de calorii consumate astazi este: $total"
+    }
+
+    private fun getMyData() {
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .build()
+            .create(ApiInterface::class.java)
+
+        val retrofitData = retrofitBuilder.getData()
+
+        retrofitData.enqueue(object : Callback<List<MyDataItem>?> {
+            override fun onResponse(
+                call: Call<List<MyDataItem>?>,
+                response: Response<List<MyDataItem>?>
+            ) {
+                val responseBody = response.body()!!
+                adapterItem = AdapterItem(responseBody, this@InformationFragment)
+                adapterItem.notifyDataSetChanged()
+                recyclerview_lista.adapter=adapterItem
             }
+
+
+            override fun onFailure(call: Call<List<MyDataItem>?>, t: Throwable) {
+                d("informationFragment", "onFailure: " + t.message)
+            }
+        })
     }
 }

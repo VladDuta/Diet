@@ -97,7 +97,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias=".32"
-            app:boxBackgroundColor="@color/white">
+            app:boxBackgroundColor="@color/white"
+
+            >
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -106,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:textColorHint="#3f51b5"
-                >
+
+               >
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
@@ -122,7 +125,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias=".45"
-            app:boxBackgroundColor="@color/white">
+            app:boxBackgroundColor="@color/white"
+
+           >
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -130,7 +135,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:textColorHint="#3f51b5">
+                android:textColorHint="#3f51b5"
+                >
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
